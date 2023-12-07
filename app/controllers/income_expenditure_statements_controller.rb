@@ -3,7 +3,7 @@ class IncomeExpenditureStatementsController < ApplicationController
 
   # GET /income_expenditure_statements or /income_expenditure_statements.json
   def index
-    @income_expenditure_statements = IncomeExpenditureStatement.all
+    @income_expenditure_statements = current_user.income_expenditure_statements
   end
 
   # GET /income_expenditure_statements/1 or /income_expenditure_statements/1.json
@@ -12,7 +12,7 @@ class IncomeExpenditureStatementsController < ApplicationController
 
   # GET /income_expenditure_statements/new
   def new
-    @income_expenditure_statement = IncomeExpenditureStatement.new
+    @income_expenditure_statement = current_user.income_expenditure_statements.new
   end
 
   # GET /income_expenditure_statements/1/edit
@@ -21,7 +21,7 @@ class IncomeExpenditureStatementsController < ApplicationController
 
   # POST /income_expenditure_statements or /income_expenditure_statements.json
   def create
-    @income_expenditure_statement = IncomeExpenditureStatement.new(income_expenditure_statement_params)
+    @income_expenditure_statement = current_user.income_expenditure_statements.new(income_expenditure_statement_params)
 
     respond_to do |format|
       if @income_expenditure_statement.save
@@ -65,6 +65,7 @@ class IncomeExpenditureStatementsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def income_expenditure_statement_params
-      params.require(:income_expenditure_statement).permit(:name, :user_id)
+      params.require(:income_expenditure_statement).permit(:name, :user_id, incomes_attributes: %i[id category earning],
+      expenditures_attributes: %i[id category expense])
     end
 end
