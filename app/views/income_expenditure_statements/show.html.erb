@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @income_expenditure_statement %>
+
+<div>
+  <%= link_to "Edit this income expenditure statement", edit_income_expenditure_statement_path(@income_expenditure_statement) %> |
+  <%= link_to "Back to income expenditure statements", income_expenditure_statements_path %>
+
+  <%= button_to "Destroy this income expenditure statement", @income_expenditure_statement, method: :delete %>
+</div>

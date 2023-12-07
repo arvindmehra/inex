@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Income expenditure statements</h1>
+
+<div id="income_expenditure_statements">
+  <% @income_expenditure_statements.each do |income_expenditure_statement| %>
+    <%= render income_expenditure_statement %>
+    <p>
+      <%= link_to "Show this income expenditure statement", income_expenditure_statement %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New income expenditure statement", new_income_expenditure_statement_path %>
