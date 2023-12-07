@@ -1,4 +1,5 @@
 class IncomeExpenditureStatementsController < ApplicationController
+  include IncomeExpenditureStatementsHelper
   before_action :set_income_expenditure_statement, only: %i[ show edit update destroy ]
 
   # GET /income_expenditure_statements or /income_expenditure_statements.json
@@ -13,6 +14,7 @@ class IncomeExpenditureStatementsController < ApplicationController
   # GET /income_expenditure_statements/new
   def new
     @income_expenditure_statement = current_user.income_expenditure_statements.new
+    setup_incomes_and_expenditures
   end
 
   # GET /income_expenditure_statements/1/edit

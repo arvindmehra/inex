@@ -5,8 +5,33 @@
   </p>
 
   <p>
-    <strong>User:</strong>
-    <%= income_expenditure_statement.user_id %>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Income</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Expenditure</th>
+            <th scope="col">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% max_rows = total_rows(income_expenditure_statement) %>
+          <% max_rows.times do |index| %>
+            <tr>
+              <td><%= income_expenditure_statement.incomes[index]&.category %></td>
+              <td><%= income_expenditure_statement.incomes[index]&.earning %></td>
+              <td><%= income_expenditure_statement.expenditures[index]&.category %></td>
+              <td><%= income_expenditure_statement.expenditures[index]&.expense %></td>
+              <td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+  </p>
+
+  <p>
+    <strong>Rating:</strong>
+    <%= income_expenditure_statement.rating %>
   </p>
 
 </div>
