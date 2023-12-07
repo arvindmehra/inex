@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class IncomeExpenditureStatementsController < ApplicationController
   include IncomeExpenditureStatementsHelper
-  before_action :set_income_expenditure_statement, only: %i[ show edit update destroy ]
+  before_action :set_income_expenditure_statement, only: %i[show edit update destroy]
 
   # GET /income_expenditure_statements or /income_expenditure_statements.json
   def index
@@ -8,8 +10,7 @@ class IncomeExpenditureStatementsController < ApplicationController
   end
 
   # GET /income_expenditure_statements/1 or /income_expenditure_statements/1.json
-  def show
-  end
+  def show; end
 
   # GET /income_expenditure_statements/new
   def new
@@ -18,8 +19,7 @@ class IncomeExpenditureStatementsController < ApplicationController
   end
 
   # GET /income_expenditure_statements/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /income_expenditure_statements or /income_expenditure_statements.json
   def create
@@ -27,7 +27,10 @@ class IncomeExpenditureStatementsController < ApplicationController
 
     respond_to do |format|
       if @income_expenditure_statement.save
-        format.html { redirect_to income_expenditure_statement_url(@income_expenditure_statement), notice: "Income expenditure statement was successfully created." }
+        format.html do
+          redirect_to income_expenditure_statement_url(@income_expenditure_statement),
+                      notice: 'Income expenditure statement was successfully created.'
+        end
         format.json { render :show, status: :created, location: @income_expenditure_statement }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +43,10 @@ class IncomeExpenditureStatementsController < ApplicationController
   def update
     respond_to do |format|
       if @income_expenditure_statement.update(income_expenditure_statement_params)
-        format.html { redirect_to income_expenditure_statement_url(@income_expenditure_statement), notice: "Income expenditure statement was successfully updated." }
+        format.html do
+          redirect_to income_expenditure_statement_url(@income_expenditure_statement),
+                      notice: 'Income expenditure statement was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @income_expenditure_statement }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,20 +60,24 @@ class IncomeExpenditureStatementsController < ApplicationController
     @income_expenditure_statement.destroy!
 
     respond_to do |format|
-      format.html { redirect_to income_expenditure_statements_url, notice: "Income expenditure statement was successfully destroyed." }
+      format.html do
+        redirect_to income_expenditure_statements_url,
+                    notice: 'Income expenditure statement was successfully destroyed.'
+      end
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_income_expenditure_statement
-      @income_expenditure_statement = IncomeExpenditureStatement.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def income_expenditure_statement_params
-      params.require(:income_expenditure_statement).permit(:name, :user_id, incomes_attributes: %i[id category earning],
-      expenditures_attributes: %i[id category expense])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_income_expenditure_statement
+    @income_expenditure_statement = IncomeExpenditureStatement.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def income_expenditure_statement_params
+    params.require(:income_expenditure_statement).permit(:name, :user_id, incomes_attributes: %i[id category earning],
+                                                                          expenditures_attributes: %i[id category expense])
+  end
 end

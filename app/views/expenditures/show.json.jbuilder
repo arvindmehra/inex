@@ -1,1 +1,3 @@
-json.partial! "expenditures/expenditure", expenditure: @expenditure
+# frozen_string_literal: true
+
+json.partial! 'expenditures/expenditure', expenditure: @expenditure

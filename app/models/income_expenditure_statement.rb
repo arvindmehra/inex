@@ -1,30 +1,34 @@
+# frozen_string_literal: true
+
 class IncomeExpenditureStatement < ApplicationRecord
-  
   belongs_to :user
   has_many :incomes, dependent: :destroy
-  accepts_nested_attributes_for :incomes, allow_destroy: true, reject_if: proc { |attributes| attributes['earning'].blank? }
+  accepts_nested_attributes_for :incomes, allow_destroy: true, reject_if: proc { |attributes|
+                                                                            attributes['earning'].blank?
+                                                                          }
   has_many :expenditures, dependent: :destroy
-  accepts_nested_attributes_for :expenditures, allow_destroy: true, reject_if: proc { |attributes| attributes['expense'].blank? }
+  accepts_nested_attributes_for :expenditures, allow_destroy: true, reject_if: proc { |attributes|
+                                                                                 attributes['expense'].blank?
+                                                                               }
 
   validates :user_id, presence: true
   validates :name, presence: true
 
   def rating
-    begin 
+    begin
       ratio = expenditures.sum(:expense) * 100 / incomes.sum(:earning)
-    rescue ZeroDivisionError => e
+    rescue ZeroDivisionError
       ratio = 0
     end
     case ratio
     when ratio < 10
-      "A"
+      'A'
     when (10..30)
-      "B"
+      'B'
     when (31..50)
-      "C"
+      'C'
     else
-      "D"
+      'D'
     end
   end
-
 end
