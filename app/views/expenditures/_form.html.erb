@@ -1,27 +1,13 @@
-<%= form_with(model: expenditure) do |form| %>
-  <% if expenditure.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(expenditure.errors.count, "error") %> prohibited this expenditure from being saved:</h2>
-
-      <ul>
-        <% expenditure.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :expense, style: "display: block" %>
-    <%= form.text_field :expense %>
+<div class="nested-form-wrapper" data-new-record="<%= f.object.new_record?  %>" style= "display: flex">
+  <div class="col-sm-6"> 
+    <%= f.text_field :category, placeholder: "Type", class: "form-control" %>
+  </div>
+  <div class="col-sm-6"> 
+    <%= f.number_field :expense, placeholder: "Amount", class: "form-control"  %>
   </div>
 
-  <div>
-    <%= form.label :category, style: "display: block" %>
-    <%= form.text_field :category %>
-  </div>
+  <button type="button" data-action="nested-form#remove" class="btn btn-primary" >X</button>
 
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+  <%= f.hidden_field :_destroy %>
+</div>
+
