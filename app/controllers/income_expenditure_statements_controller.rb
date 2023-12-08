@@ -77,7 +77,7 @@ class IncomeExpenditureStatementsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def income_expenditure_statement_params
-    params.require(:income_expenditure_statement).permit(:name, :user_id, incomes_attributes: %i[id category earning],
-                                                                          expenditures_attributes: %i[id category expense])
+    params.require(:income_expenditure_statement).permit(:name, :user_id, incomes_attributes: %i[id category earning _destroy],
+                                                                          expenditures_attributes: %i[id category expense _destroy])
   end
 end
