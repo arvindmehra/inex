@@ -3,6 +3,10 @@
 
 InEx is a web application that enables customers to create an income and expenditure statement. It calculates their disposable income and provides an I&E rating.
 
+# Description
+An Income & Expenditure (I&E) statement is a document that helps to understand someone's financial situation. It includes income (e.g. salary, benefits) and expenditure (e.g. rent, utilities). It can be used to help us assess whether repayments are affordable.
+
+
 ## Built With
 
 - Ruby on Rails 7
